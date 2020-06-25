@@ -1,0 +1,100 @@
+import java.util.Scanner;
+
+
+public class Poly2 {
+
+float X1min,X1max,Y1min,Y1max,X2min,X2max,Y2min,Y2max,Xo,Yo;
+	
+	Poly2(){}
+	Poly2(float X1min,float X1max,float Y1min,float Y1max,float X2min,float X2max,float Y2min,float Y2max,float Xo,float Yo){
+		this.X1min=X1min;
+		this.X1max=X1max;
+		this.Y1min=Y1min;
+		this.Y1max=Y1max;
+		this.X2min=X2min;
+		this.X2max=X2max;
+		this.Y2min=Y2min;
+		this.Y2max=Y2max;
+		this.Xo=Xo;
+		this.Yo=Yo;
+		}
+	
+	public float calcSunExposedLength(float X1min,float X1max,float Y1min,float Y1max,float X2min,float X2max,float Y2min,float Y2max,float Xo,float Yo){
+		/* Poly1_length=mod|Y1max-Y1min|+mod|X1max-X1min|
+		 * Poly2_length=d+l+mod|X2max-X2min|
+		 * d=mod|Y2max-Y1max|
+		 * l=mod|((X2min-X1max)*(Yo-Y1max))/(Xo-X1max)|
+		 */
+		
+		float total,poly1_length,poly2_length,d,l;
+		poly1_length=Math.abs(Y1max-Y1min)+Math.abs(X1max-X1min);
+		
+		d=Math.abs(Y2max-Y1max);
+		l=(Math.abs(X2min-X1max)*Math.abs(Yo-Y1max))/(Math.abs(Xo-X1max));
+		poly2_length=d+l+Math.abs(X2max-X2min);
+		
+		total=poly1_length+poly2_length;
+		
+		return total;		
+	}
+	
+	public static void main(String[] args) {
+		Poly2 poly=new Poly2();
+		
+		/*Calculate Length for two polygon exposed to sunlight w.r.t sun on LHS of buildings */
+		
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Please enter minimum X coordinate for Polygon1: ");
+		poly.X1min=sc.nextFloat();
+		System.out.println("Please enter maximum X coordinate for Polygon1: ");
+		poly.X1max=sc.nextFloat();
+		System.out.println("Please enter minimum Y coordinate for Polygon1: ");
+		poly.Y1min=sc.nextFloat();
+		System.out.println("Please enter maximum Y coordinate for Polygon1: ");
+		poly.Y1max=sc.nextFloat();
+		
+		System.out.println("Please enter minimum X coordinate for Polygon2: ");
+		poly.X2min=sc.nextFloat();
+		System.out.println("Please enter maximum X coordinate for Polygon2: ");
+		poly.X2max=sc.nextFloat();
+		System.out.println("Please enter minimum Y coordinate for Polygon2: ");
+		poly.Y2min=sc.nextFloat();
+		System.out.println("Please enter maximum Y coordinate for Polygon2: ");
+		poly.Y2max=sc.nextFloat();
+		
+		System.out.println("Please enter Sun X coordinate : ");
+		poly.Xo=sc.nextFloat();		
+		System.out.println("Please enter Sun Y coordinate : ");
+		poly.Yo=sc.nextFloat();		
+			
+		System.out.println("Sun Exposed Length is : "+poly.calcSunExposedLength(poly.X1min, poly.X1max, poly.Y1min, poly.Y1max, poly.X2min, poly.X2max, poly.Y2min, poly.Y2max,poly.Xo, poly.Yo));
+		
+		sc.close();
+
+	}
+
+}
+
+/* Output
+Please enter minimum X coordinate for Polygon1: 
+4
+Please enter maximum X coordinate for Polygon1: 
+7
+Please enter minimum Y coordinate for Polygon1: 
+-5
+Please enter maximum Y coordinate for Polygon1: 
+0
+Please enter minimum X coordinate for Polygon2: 
+0.4
+Please enter maximum X coordinate for Polygon2: 
+2.5
+Please enter minimum Y coordinate for Polygon2: 
+-5
+Please enter maximum Y coordinate for Polygon2: 
+-2
+Please enter Sun X coordinate : 
+-3.5
+Please enter Sun Y coordinate : 
+1
+Sun Exposed Length is : 12.728571
+*/
