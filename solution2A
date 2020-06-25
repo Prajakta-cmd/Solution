@@ -1,0 +1,67 @@
+import java.util.Scanner;
+import java.lang.Math;
+
+public class Poly1 {
+	float Xmin,Xmax,Ymin,Ymax,Xo,Yo;
+	
+	Poly1(){}
+	Poly1(float Xmin,float Xmax,float Ymin,float Ymax,float Xo,float Yo){
+		this.Xmin=Xmin;
+		this.Xmax=Xmax;
+		this.Ymin=Ymin;
+		this.Ymax=Ymax;
+		this.Xo=Xo;
+		this.Yo=Yo;
+		}
+	
+	public float calcSunExposedLength(float Xmin,float Xmax,float Ymin,float Ymax,float Xo,float Yo){
+		float length;
+		length=Math.abs(Ymax-Ymin)+Math.abs(Xmax-Xmin);
+		return length;		
+	}
+	
+	
+	public static void main(String[] args) {
+		
+		Poly1 poly=new Poly1();
+		
+		/*Calculate Length for single polygon exposed to sunlight w.r.t sun on LHS of building*/
+		
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Please enter minimum X coordinate : ");
+		poly.Xmin=sc.nextFloat();
+		System.out.println("Please enter maximum X coordinate : ");
+		poly.Xmax=sc.nextFloat();
+		System.out.println("Please enter minimum Y coordinate : ");
+		poly.Ymin=sc.nextFloat();
+		System.out.println("Please enter maximum Y coordinate : ");
+		poly.Ymax=sc.nextFloat();
+		System.out.println("Please enter Sun X coordinate : ");
+		poly.Xo=sc.nextFloat();		
+		System.out.println("Please enter Sun Y coordinate : ");
+		poly.Yo=sc.nextFloat();		
+			
+		System.out.println("Sun Exposed Length is : "+poly.calcSunExposedLength(poly.Xmin, poly.Xmax, poly.Ymin, poly.Ymax, poly.Xo, poly.Yo));
+		
+		sc.close();
+	}
+
+}
+
+/*
+ * Output
+ * 
+Please enter minimum X coordinate : 
+4
+Please enter maximum X coordinate : 
+7
+Please enter minimum Y coordinate : 
+-5
+Please enter maximum Y coordinate : 
+0
+Please enter Sun X coordinate : 
+1
+Please enter Sun Y coordinate : 
+1
+Sun Exposed Length is : 8.0
+*/
